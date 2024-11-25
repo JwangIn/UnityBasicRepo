@@ -18,7 +18,35 @@ namespace UnityBasic.ProtoType2
         void Update()
         {
             transform.position += speed * Vector3.back* Time.deltaTime;
-        
+                    
         }
+
+        // 충돌했을 때
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.CompareTag("End"))
+            {
+                Debug.Log("게임오버");
+            }
+            
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.collider.CompareTag("End"))
+            {
+                Debug.Log("충돌 끝");
+            }
+          
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            if (collision.collider.CompareTag("End"))
+            {
+                Debug.Log("충돌 진행 중");
+            }
+        }
+
     }
 }
