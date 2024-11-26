@@ -7,6 +7,9 @@ namespace UnityBasic.ProtoType2
     public class Projectile : MonoBehaviour
     {
         public float speed;
+        public float turnSpeed;
+
+        
 
         // Start is called before the first frame update
         void Start()
@@ -19,6 +22,8 @@ namespace UnityBasic.ProtoType2
         {
             // 방향 * 속력 * 시간
             transform.position += Vector3.forward * speed * Time.deltaTime;
+            
+            Destroy(gameObject, 10);
             
         }
 

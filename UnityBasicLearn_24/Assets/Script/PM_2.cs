@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 namespace UnityBasic.ProtoType2
@@ -10,22 +11,36 @@ namespace UnityBasic.ProtoType2
         public GameObject food;
         public Vector3 offset;
 
+        // 공격 속도를 A라 하면 
+     
+        public float timer;
+        public float waitingTime;
+
+
         // Start is called before the first frame update
         void Start()
         {
-        
+            timer = 0;
+                   
         }
 
         // Update is called once per frame
         void Update()
         {
+            timer += Time.deltaTime;
+
             Move();
-            Attack();
+            if (timer > waitingTime)
+            {
+                Attack();
+                timer = 0;
+            }
+          
         }
 
         private void Attack()
-        {
-            if(Input.GetKeyDown(KeyCode.LeftControl)) 
+        {            
+            if (Input.GetKey(KeyCode.LeftControl)) 
             { 
                 Vector3 foodPos = new Vector3(transform.position.x, transform.position.y, transform.position.z)+ offset;
                 Instantiate(food, foodPos,Quaternion.identity);
@@ -52,5 +67,17 @@ namespace UnityBasic.ProtoType2
 
             transform.position += moveInput * speed * Time.deltaTime;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Item"))
+            {
+                IitemCollectable item = other.GetComponent<IitemCollectable>();
+                item.Interact();
+
+                Destroy(other.gameObject);
+            }
+        }
+
     }
 }
