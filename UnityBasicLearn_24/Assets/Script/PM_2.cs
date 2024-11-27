@@ -68,6 +68,12 @@ namespace UnityBasic.ProtoType2
             transform.position += moveInput * speed * Time.deltaTime;
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            
+        }
+
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Item"))
@@ -77,6 +83,15 @@ namespace UnityBasic.ProtoType2
 
                 Destroy(other.gameObject);
             }
+            if (other.CompareTag("Animal"))
+            {
+                GameManager.instance.DecreaseScore();
+            }
+        }
+
+        public void speedUp()
+        {
+            speed += 5f;
         }
 
     }

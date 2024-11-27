@@ -22,29 +22,12 @@ namespace UnityBasic.ProtoType2
         }
 
         // 충돌했을 때
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (collision.collider.CompareTag("End"))
+            if (other.CompareTag("End"))
             {
+                GameManager.instance.GameOver();
                 Debug.Log("게임오버");
-            }
-            
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (collision.collider.CompareTag("End"))
-            {
-                Debug.Log("충돌 끝");
-            }
-          
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            if (collision.collider.CompareTag("End"))
-            {
-                Debug.Log("충돌 진행 중");
             }
         }
 

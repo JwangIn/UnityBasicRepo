@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityBasic.ProtoType2
-{
+{  
+
     public interface IitemCollectable
     {
         public void Interact();
     }
 
-    public class Banana : MonoBehaviour,IitemCollectable
+    public class Banana : Item
     {
-       public void Interact()
+        public override void Interact()
         {
-            Debug.Log("바나나 아이템의 기능이 실행됩니다.");
-           
+            base.Interact();
+            Debug.Log("바나나 아이템이 사용됩니다.");
         }
+
     }
 }

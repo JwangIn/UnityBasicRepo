@@ -27,14 +27,16 @@ namespace UnityBasic.ProtoType2
             
         }
 
-        private void OnCollisionEnter(Collision collision)
+      
+
+        private void OnTriggerEnter(Collider other)
         {
-            // tag의 Animal 대상이면 자기자신과 충돌한 대상의 게임 오브젝트를 파괴해라
-            if(collision.collider.CompareTag("Animal"))
+            if (other.CompareTag("Animal"))
             {
-                Destroy(collision.gameObject);
+                Destroy(other.gameObject);
                 Destroy(gameObject);
             }
         }
+
     }
 }
